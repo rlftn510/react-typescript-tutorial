@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { RootReducerType } from './Store'
 import { fetchPokemonData } from './_actions/PokemonActions'
+import { theme } from './styles/theme'
+import { ThemeProvider } from 'styled-components'
 
 function App() {
    const [pokemonName, setPokemonName] = useState('')   
@@ -15,6 +17,7 @@ function App() {
 
 
    return (
+      <ThemeProvider theme={theme}>
       <div className="App">
          <input value={pokemonName} onChange={handlePokemonName}/>
          <button onClick={searchButtonTapped}>포켓폰찾기</button>
@@ -36,6 +39,7 @@ function App() {
             <img/>
          </div>
       </div>
+      </ThemeProvider>
    );
 }
 
