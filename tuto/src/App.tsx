@@ -4,6 +4,7 @@ import { RootReducerType } from './Store'
 import { fetchPokemonData } from './_actions/PokemonActions'
 import { theme } from './styles/theme'
 import { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 
 function App() {
    const [pokemonName, setPokemonName] = useState('')   
@@ -15,12 +16,19 @@ function App() {
       dispatch(fetchPokemonData(pokemonName))
    }
 
+   const CusButton = styled.button`
+      height:40px;
+      background-color: ${props => props.theme.color.main};
+      border: 1px solid #ccc;
+      border-radius: 4px
+   `
+
 
    return (
       <ThemeProvider theme={theme}>
       <div className="App">
          <input value={pokemonName} onChange={handlePokemonName}/>
-         <button onClick={searchButtonTapped}>포켓폰찾기</button>
+         <CusButton onClick={searchButtonTapped}>포켓폰찾기</CusButton>
          <div>
          {pokemonReducer.success && 
             <div>
