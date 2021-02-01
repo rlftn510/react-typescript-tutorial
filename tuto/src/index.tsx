@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { GlobalStyle } from './styles/global-styles'
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import store from './Store';
-import { GlobalStyle } from './styles/global-styles'
+
 
 ReactDOM.render(
   <React.StrictMode>
