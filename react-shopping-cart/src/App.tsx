@@ -17,7 +17,7 @@ import { ArtTrack } from '@material-ui/icons'
 
 export type CartItemType = {
    id: number;
-   catetory: string;
+   category: string;
    description: string;
    image: string;
    price: number;
@@ -32,14 +32,35 @@ const getProduct = async (): Promise<CartItemType[]> => {
 const App = () => {
    const [cartOpen, setCartOpen] = useState(false)
    const [cartItems, setCartItems] = useState([] as CartItemType[])
-   const { data, isLoading, error } = useQuery<CartItemType[]>(
-      'products',
-      getProduct
-   )
-
-   
+   // const { data, isLoading, error } = useQuery<CartItemType[]>(
+   //    'products',
+   //    getProduct
+   // )
+   const isLoading = false;
+   const data = [
+      {
+         id: 5,
+         title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+         price: 695,
+         description: "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+         category: "jewelery",
+         image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+         amount: 1,
+         },
+         {
+         id: 6,
+         title: "Solid Gold Petite Micropave ",
+         price: 168,
+         description: "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
+         category: "jewelery",
+         image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+         amount: 2,
+         },
+   ]
+   const error = false
    // const 
    const getTotalItems = (items: CartItemType[]) => {
+      console.log(items)
       return items.reduce((ack: number, item) => ack + item.amount, 0)
    }
 
@@ -77,8 +98,8 @@ const App = () => {
    if (error) return <div>someting went wrong....</div>
 
 
-   console.log(data)
-   console.log(isLoading)
+   // console.log(data)
+   // console.log(isLoading)
    return (
       <Wrapper>
          <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
