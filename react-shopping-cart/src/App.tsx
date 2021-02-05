@@ -1,11 +1,13 @@
-import { Component, useState } from 'react'
+import { Component, useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from './_actions/ProductActions'
 import Drawer from '@material-ui/core/Drawer'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Grid from '@material-ui/core/Grid'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge'
-
+import { RootReducerType } from './Store' 
 // Component
 import Item from './Item/Item'
 import Cart from './Cart/Cart'
@@ -32,10 +34,17 @@ const getProduct = async (): Promise<CartItemType[]> => {
 const App = () => {
    const [cartOpen, setCartOpen] = useState(false)
    const [cartItems, setCartItems] = useState([] as CartItemType[])
+   const [products, setProducts] = useState([] as CartItemType[])
    // const { data, isLoading, error } = useQuery<CartItemType[]>(
    //    'products',
    //    getProduct
    // )
+   const dispatch = useDispatch()
+   useEffect(() => {
+      dispatch(getProducts())
+   }, [])
+   const productReducer = useSelector((state:RootReducerType) => state.ProductReducer)
+   console.warn(productReducer)
    const isLoading = false;
    const data = [
       {

@@ -1,7 +1,7 @@
-export const PRODUCTS = 'PRODUCTS'
-export const FAIL = 'FAIL'
-
 import { CartItemType } from '../App'
+
+export const PRODUCTS = 'PRODUCTS'
+export const PRODUCT_FAIL = 'PRODUCT_FAIL'
 
 export interface ProductSucces {
    type: typeof PRODUCTS
@@ -9,7 +9,7 @@ export interface ProductSucces {
 }
 
 export interface ProductFail {
-   type: typeof FAIL
+   type: typeof PRODUCT_FAIL
 }
 
 export type ProductDispatchType = ProductSucces | ProductFail
