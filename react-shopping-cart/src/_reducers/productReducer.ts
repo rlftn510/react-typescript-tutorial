@@ -3,7 +3,7 @@ import { CartItemType } from '../App'
 
 interface initialState {
    success: boolean
-   products?: CartItemType
+   products?: CartItemType[]
 }
 const initialState: initialState = {
    success: false
@@ -17,12 +17,13 @@ const ProductReducer = ( state = initialState, action: ProductDispatchType):init
             success: true,
             products: action.payload
          }
+         break;
       case PRODUCT_FAIL:
          return {
             ...state,
             success: false
          }
-
+         break;
       default:
          return state
    }

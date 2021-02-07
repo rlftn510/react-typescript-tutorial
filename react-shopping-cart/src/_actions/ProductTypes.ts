@@ -5,7 +5,7 @@ export const PRODUCT_FAIL = 'PRODUCT_FAIL'
 
 export interface ProductSucces {
    type: typeof PRODUCTS
-   payload: CartItemType
+   payload: CartItemType[]
 }
 
 export interface ProductFail {

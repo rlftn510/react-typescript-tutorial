@@ -14,6 +14,7 @@ import Cart from './Cart/Cart'
 
 import { Wrapper, StyledButton } from './App.styles'
 import { ArtTrack } from '@material-ui/icons'
+import CartItem from './CartItem/CartItem'
 
 //types
 
@@ -34,7 +35,7 @@ const getProduct = async (): Promise<CartItemType[]> => {
 const App = () => {
    const [cartOpen, setCartOpen] = useState(false)
    const [cartItems, setCartItems] = useState([] as CartItemType[])
-   const [products, setProducts] = useState([] as CartItemType[])
+   // const [products, setProducts] = useState([] as CartItemType[])
    // const { data, isLoading, error } = useQuery<CartItemType[]>(
    //    'products',
    //    getProduct
@@ -44,8 +45,10 @@ const App = () => {
       dispatch(getProducts())
    }, [])
    const productReducer = useSelector((state:RootReducerType) => state.ProductReducer)
-   console.warn(productReducer)
-   const isLoading = false;
+   console.warn(productReducer.products)
+   const isLoading = useSelector((state:RootReducerType) => state.ProductReducer.success)
+   console.log(isLoading)
+   // sample data 
    const data = [
       {
          id: 5,
@@ -103,7 +106,7 @@ const App = () => {
        );
    }
 
-   if (isLoading) return <LinearProgress />
+   if (!isLoading) return <LinearProgress />
    if (error) return <div>someting went wrong....</div>
 
 
