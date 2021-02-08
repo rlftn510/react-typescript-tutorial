@@ -1,5 +1,4 @@
-import { Component, useState, useEffect } from 'react'
-import { useQuery } from 'react-query'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from './_actions/ProductActions'
 import Drawer from '@material-ui/core/Drawer'
@@ -11,13 +10,10 @@ import { RootReducerType } from './Store'
 // Component
 import Item from './Item/Item'
 import Cart from './Cart/Cart'
-
+// styled
 import { Wrapper, StyledButton } from './App.styles'
-import { ArtTrack } from '@material-ui/icons'
-import CartItem from './CartItem/CartItem'
 
 //types
-
 export type CartItemType = {
    id: number;
    category: string;
@@ -45,9 +41,9 @@ const App = () => {
       dispatch(getProducts())
    }, [])
    const productReducer = useSelector((state:RootReducerType) => state.ProductReducer)
-   console.warn(productReducer.products)
+   
    const isLoading = useSelector((state:RootReducerType) => state.ProductReducer.success)
-   console.log(isLoading)
+   
    // sample data 
    const data = [
       {
@@ -72,24 +68,37 @@ const App = () => {
    const error = false
    // const 
    const getTotalItems = (items: CartItemType[]) => {
-      console.log(items)
       return items.reduce((ack: number, item) => ack + item.amount, 0)
    }
 
    const handleAddToCart = (clickedItem: CartItemType) => {
+
       setCartItems(prev => {
          const isItemInCart = prev.find(item => item.id === clickedItem.id)
 
-         if (isItemInCart) {
-            return prev.map(item => (
-               item.id === clickedItem.id
-                  ? { ...item, amount: item.amount + 1}
-                  : item
-            ))
-         }
+         if(isItemInCart) {
+            prev.map(item => {
+               return item.id === clickedItem.id ? {...item, amount: item.amount + 1} : item
 
-         return [...prev, { ...clickedItem, amount: 1}]
+            })
+         }
+         return [...prev, {...clickedItem, amount: 1}]
       })
+
+      // setCartItems(prev => {
+      //    console.log(prev)
+      //    const isItemInCart = prev.find(item => item.id === clickedItem.id)
+
+      //    if (isItemInCart) {
+      //       return prev.map(item => (
+      //          item.id === clickedItem.id
+      //             ? { ...item, amount: item.amount + 1}
+      //             : item
+      //       ))
+      //    }
+
+      //    return [...prev, { ...clickedItem, amount: 1}]
+      // })
    }
    const handleRemoveFromCart = (id: number) => {
       setCartItems(prev => {
@@ -108,10 +117,7 @@ const App = () => {
 
    if (!isLoading) return <LinearProgress />
    if (error) return <div>someting went wrong....</div>
-
-
-   // console.log(data)
-   // console.log(isLoading)
+   
    return (
       <Wrapper>
          <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>

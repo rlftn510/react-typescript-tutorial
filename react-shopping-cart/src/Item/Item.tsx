@@ -6,7 +6,7 @@ import { Wrapper } from './Item.styles'
 
 type Props = {
    item: CartItemType
-   handleAddToCart: (clickedItem: CartItemType) => void
+   handleAddToCart: (clickedItem: CartItemType) => void  // 값을 반환하지 않는 함수
 }
 
 const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
