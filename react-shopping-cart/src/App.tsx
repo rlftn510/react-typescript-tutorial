@@ -8,7 +8,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge'
 import { RootReducerType } from './Store' 
 // Component
-import Item from './Item/Item'
+import Item from './components/Item/Item'
 import Cart from './Cart/Cart'
 // styled
 import { Wrapper, StyledButton } from './App.styles'
@@ -122,7 +122,7 @@ const App = () => {
       <Wrapper>
          <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
             <Cart 
-               cartItems={cartItems} 
+               cartItems={cartItems}
                addToCart={handleAddToCart}
                removeFromCart={handleRemoveFromCart}
             />

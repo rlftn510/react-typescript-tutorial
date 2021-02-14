@@ -1,4 +1,4 @@
-import CartItem from '../CartItem/CartItem'
+import CartItem from '../components/CartItem/CartItem'
 
 import { Wrapper } from './Cart.styles'
 
