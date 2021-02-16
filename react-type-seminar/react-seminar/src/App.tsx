@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, RouteComponentProps } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, RouteComponentProps, Switch, Redirect, NavLink } from 'react-router-dom'
 
 const Post = (props: RouteComponentProps<{postId: string}>) => {
    const nextBtn = (): void => {
@@ -28,6 +28,21 @@ const PostList = (props: RouteComponentProps<{}>) => {
    )
 }
 
+const NotFound = () => {
+   return (
+      <div>
+         <h2>NOT FOUND!!</h2>
+      </div>
+   )
+}
+const AdminPage = () => {
+   const isAdmin = true;
+   return (
+      isAdmin ? <h3>ADMIN</h3> 
+      : <Redirect to="/"></Redirect>
+   )
+}
+
 function App() {
   return (
      <Router>
@@ -40,13 +55,20 @@ function App() {
       </header>
       <nav>
          <ul>
-            <li><Link to="/">home</Link></li>
-            <li><Link to="/intro">intro</Link></li>
+            <li><NavLink exact activeStyle={{fontSize: 20}} to="/">home</NavLink></li>
+            <li><NavLink exact activeStyle={{fontSize: 20}} to="/intro">intro</NavLink></li>
+            <li><NavLink exact activeStyle={{fontSize: 20}} to="/admin">admin</NavLink></li>
          </ul>
       </nav>
-      <Route exact path="/" render={() => <h2>hello</h2>}/>
-      <Route path="/intro" render={() => <h2>intro</h2>}/>
-      <Route path="/posts" component={PostList}/>
+      <Switch>
+         <Route exact path="/" render={() => <h2>hello</h2>}/>
+         <Route path="/intro" render={() => <h2>intro</h2>}/>
+         <Route path="/posts" component={PostList}/>
+         <Route path="/admin" component={AdminPage}/>
+         <Redirect from="/about" to="/intro"></Redirect>
+         <Route component={NotFound}></Route>
+      </Switch>
+      
     </div>
     </Router>
   );
