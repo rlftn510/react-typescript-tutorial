@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, RouteComponentProps, Switch, Redirect, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route, RouteComponentProps, Switch, Redirect, NavLink } from 'react-router-dom'
 
 const Post = (props: RouteComponentProps<{postId: string}>) => {
    const nextBtn = (): void => {
