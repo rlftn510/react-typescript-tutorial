@@ -1,17 +1,37 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import AppContainer from './App';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+// yarn add redux @types/redux
+import {createStore} from 'redux';
+// yarn add react-redux @types/react-redux
+import {Provider} from 'react-redux';
+
+// 타입 정의
+const ADD_AGE = 'ADD_AGE';
+
+// 타입 생성 함수
+export function addAge(): { type: string; } {
+  return {
+    type: ADD_AGE
+  };
+}
+
+// 리듀서
+function ageApp(state: { age: number; } = {age: 35}, action: { type: string; }): { age: number; } {
+  if (action.type === ADD_AGE) {
+    return {age: state.age + 1};
+  }
+  return state;
+}
+
+// 스토어 만들기
+const store = createStore(ageApp);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
