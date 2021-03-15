@@ -24,9 +24,9 @@ export type CartItemType = {
    amount: number;
 }
 
-const getProduct = async (): Promise<CartItemType[]> => {
-   return await (await fetch('https://fakestoreapi.com/products')).json();
-}
+// const getProduct = async (): Promise<CartItemType[]> => {
+//    return await (await fetch('https://fakestoreapi.com/products')).json();
+// }
 
 const App = () => {
    const [cartOpen, setCartOpen] = useState(false)
@@ -77,10 +77,9 @@ const App = () => {
          const isItemInCart = prev.find(item => item.id === clickedItem.id)
 
          if(isItemInCart) {
-            prev.map(item => {
-               return item.id === clickedItem.id ? {...item, amount: item.amount + 1} : item
-
-            })
+            return prev.map(item => (
+               item.id === clickedItem.id ? { ...item, amount: item.amount + 1} : item
+            ))
          }
          return [...prev, {...clickedItem, amount: 1}]
       })
