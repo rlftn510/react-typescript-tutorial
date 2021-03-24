@@ -4,7 +4,7 @@ import { ProductDispatchType, PRODUCTS, PRODUCT_FAIL } from './ProductTypes'
 
 export const getProducts = () => async (dispatch: Dispatch<ProductDispatchType>) => {
    try {
-      const res = await Axios.get(`https://fakestoreapi.com/products`)
+      const res = await Axios.get(`https://fakestoreapi.herokuapp.com/products`)
       const data = res.data
       console.log(data)
       dispatch({
