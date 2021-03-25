@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { GiWireCoil } from 'react-icons/gi';
+import './TodoTitle.scss';
 
-const TodoTitle = () => {
+const TodoTitle = (): JSX.Element => {
   return (
-    <div>
-      
+    <div className='TodoTitle'>
+      <GiWireCoil className='TodoTitle-Icon' />
+      <div className='TodoTitle-Title'>TodoList With Recoil</div>
     </div>
-  )
-}
+  );
+};
 
-export default TodoTitle
+export default TodoTitle;
